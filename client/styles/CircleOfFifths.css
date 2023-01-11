@@ -1,0 +1,43 @@
+.main-container {
+    /* height: 1000px; */
+    width: 1000px;
+    padding: 20px;
+    background-color: rgb(42, 42, 42);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.main-circle {
+    border-radius: 50%;
+    background-color: grey;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.current-key {
+    background-color: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.key {
+    position: absolute;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.major {
+    background-color: lightblue;
+}
+
+.minor {
+    background-color: rgb(237, 165, 20);
+    color: white;
+}
