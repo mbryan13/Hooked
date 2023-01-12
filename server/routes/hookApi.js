@@ -20,7 +20,7 @@ const queryHookApi = (req, res, next) => {
         .catch(e => console.log(e));
 }
 
-router.get('/', queryHookApi, (req, res) => res.status(200).setHeader("Access-Control-Allow-Origin", "*").json({ chords: res.locals.chords }));
+router.get('/', queryHookApi, (req, res) => res.status(200).json({ chords: res.locals.chords }));
 
 
 module.exports = router;

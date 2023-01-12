@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 
 export default function Key(props) {
-    const { name, degrees, radius, size, quality, probableChords } = props;
+    const { name, scaleDegree, degrees, radius, size, quality, probableChords, addChord } = props;
     const positionKey = degrees => {
         let x, y, inwardPull;
         quality === 'major' ? inwardPull = 100 : inwardPull = 220;
@@ -16,7 +16,8 @@ export default function Key(props) {
         // })
     }
     return (
-        <div style={{ transform: positionKey(degrees), height: `${size}px`, width: `${size}px`, border: getProbability() }} className={`${quality} key`}>{name}</div>
+        <div onClick={() => addChord({ name, scaleDegree })} style={{ transform: positionKey(degrees), height: `${size}px`, width: `${size}px`, border: getProbability() }} className={`${quality} key`}>{name} ({scaleDegree})</div>
     )
 }
+
 

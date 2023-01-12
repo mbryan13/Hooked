@@ -3,16 +3,14 @@ import '../styles/CircleOfFifths.css';
 import Key from './Key.jsx';
 
 export default function CircleOfFifths(props) {
-    const { setChords, chordSuggestions } = props;
-    const [key, setKey] = useState('C');
+    const { addChord, chordSuggestions, tonic } = props;
     const majorKeys = ['C', 'G', 'D', 'A', 'E', 'B', 'Gb', 'Db', 'Ab', 'Eb', 'Bb', 'F'];
     const minorKeys = ['A', 'E', 'B', 'Gb', 'Db', 'Ab', 'Eb', 'Bb', 'F', 'C', 'G', 'D'];
     const CIRCLESIZE = 800;
-    console.log(chordSuggestions);
 
-    const calcProbability = circleKey => {
-        // console.log(circleKey);
-        const match = scaleDegrees[key][circleKey];
+    const calcProbability = key => {
+        // console.log(key);
+        const match = scaleDegrees[tonic][key];
         let regex;
         const noMatches = {
             'i': 'v',
@@ -54,6 +52,8 @@ export default function CircleOfFifths(props) {
                         size={CIRCLESIZE / 6}
                         quality='major'
                         probableChords={calcProbability(key)}
+                        addChord={addChord}
+                        scaleDegree={romanToNumber[scaleDegrees[tonic][key]]}
                     />
                 })}
                 {/* {minorKeys.map((key, index) => {
@@ -64,12 +64,22 @@ export default function CircleOfFifths(props) {
                         size={CIRCLESIZE / 9.5}
                         quality='minor'
                         probableChords={calcProbability(key)}
+                        addChord={addChord}
                     />
                 })} */}
-                <div style={{ height: CIRCLESIZE / 7, width: CIRCLESIZE / 7 }} className="current-key">{key}</div>
+                <div style={{ height: CIRCLESIZE / 7, width: CIRCLESIZE / 7 }} className="current-key">{tonic}</div>
             </div>
         </div >
     )
+}
+const romanToNumber = {
+    'I': 1,
+    'ii': 2,
+    'iii': 3,
+    'IV': 4,
+    'V': 5,
+    'vi': 6,
+    'vii': 7
 }
 
 const scaleDegrees = {

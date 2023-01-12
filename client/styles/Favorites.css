@@ -1,0 +1,13 @@
+.favorites-container {
+    background-color: lightblue;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.favorite-container {
+    background-color: grey;
+    height: 100px;
+    width: 400px;
+}
