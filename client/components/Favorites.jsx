@@ -4,21 +4,21 @@ import Favorite from './Favorite.jsx';
 
 export default function Favorites(props) {
     const { favCount } = props;
-    const [favorites, setFavorites] = useState([]);
-    // const favorites = [
-    //     {
-    //         key: 'A',
-    //         progression: 'I-v-vi-VII',
-    //         description: 'Nice',
-    //         qualities: ['Cool', 'Dope']
-    //     },
-    //     {
-    //         key: 'F#',
-    //         progression: 'I-IV-vi-ii',
-    //         description: 'Whoa',
-    //         qualities: ['Owow', 'Amazing']
-    //     }
-    // ]
+    // const [favorites, setFavorites] = useState([]);
+    const favorites = [
+        {
+            key: 'A',
+            progression: 'I-v-vi-VII',
+            description: 'Nice',
+            qualities: ['Cool', 'Dope']
+        },
+        {
+            key: 'F#',
+            progression: 'I-IV-vi-ii',
+            description: 'Whoa',
+            qualities: ['Owow', 'Amazing']
+        }
+    ]
     const fetchFavorites = () => {
         fetch('http://localhost:3000/favs/mbryan13')
             .then(res => res.json())

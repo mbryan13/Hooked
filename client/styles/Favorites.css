@@ -4,10 +4,35 @@
     display: flex;
     flex-direction: column;
     gap: 15px;
+    border: 1px solid black;
 }
 
-.favorite-container {
-    background-color: grey;
+.favorite-grid {
+    background-color: rgb(42, 42, 42);
+    color: white;
     height: 100px;
     width: 400px;
+    border: 1px solid black;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+}
+
+.favorite-grid-item {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.favorite-grid-item-tonic {
+    /* background-color: blue; */
+}
+.favorite-grid-item-progression {
+    /* background-color: red; */
+}
+.favorite-grid-item-description {
+    /* background-color: green; */
+}
+.favorite-grid-item-qualities {
+    /* background-color: yellow; */
 }

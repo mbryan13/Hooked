@@ -3,7 +3,7 @@ import '../styles/CircleOfFifths.css';
 import Key from './Key.jsx';
 
 export default function CircleOfFifths(props) {
-    const { addChord, chordSuggestions, tonic } = props;
+    const { addChord, chordSuggestions, tonic, setTonic } = props;
     const majorKeys = ['C', 'G', 'D', 'A', 'E', 'B', 'Gb', 'Db', 'Ab', 'Eb', 'Bb', 'F'];
     const minorKeys = ['A', 'E', 'B', 'Gb', 'Db', 'Ab', 'Eb', 'Bb', 'F', 'C', 'G', 'D'];
     const CIRCLESIZE = 800;
@@ -42,7 +42,8 @@ export default function CircleOfFifths(props) {
     }
 
     return (
-        <div className='main-container' >
+        <div style={{ width: `${CIRCLESIZE + 25 }px`, height: `${CIRCLESIZE + 25 }px` }} className='main-container' >
+            <div style={{ width: `${CIRCLESIZE + 25 }px`, height: `${CIRCLESIZE + 25 }px` }} className="main-circle-border"></div>
             <div style={{ width: `${CIRCLESIZE}px`, height: `${CIRCLESIZE}px` }} className="main-circle">
                 {majorKeys.map((key, index) => {
                     return <Key
@@ -56,7 +57,7 @@ export default function CircleOfFifths(props) {
                         scaleDegree={romanToNumber[scaleDegrees[tonic][key]]}
                     />
                 })}
-                {/* {minorKeys.map((key, index) => {
+                {minorKeys.map((key, index) => {
                     return <Key
                         name={`${key}`}
                         degrees={30 * index}
@@ -66,8 +67,8 @@ export default function CircleOfFifths(props) {
                         probableChords={calcProbability(key)}
                         addChord={addChord}
                     />
-                })} */}
-                <div style={{ height: CIRCLESIZE / 7, width: CIRCLESIZE / 7 }} className="current-key">{tonic}</div>
+                })}
+                <div style={{ height: CIRCLESIZE / 5, width: CIRCLESIZE / 5 }} className="key current-key">{tonic} <button>Up</button><button>Down</button></div>
             </div>
         </div >
     )

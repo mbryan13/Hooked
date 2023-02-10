@@ -4,11 +4,23 @@ import CircleOfFifths from './CircleOfFifths.jsx';
 import Progression from './Progression.jsx';
 import '../styles/App.css';
 import Favorites from './Favorites.jsx';
+import MidiPlayer from './MidiPlayer.jsx';
 
 export default function App() {
   const [chords, setChords] = useState([]);
-  const [chordSuggestions, setChordSuggestions] = useState([]);
-  const [tonic, setTonic] = useState('C');
+  console.log(chords);
+7  // const [chordSuggestions, setChordSuggestions] = useState([]);
+  const chordSuggestions = [
+    {
+      probability: .182, 
+      chord_HTML: 'I'
+    }, 
+    {
+      probability: .102, 
+      chord_HTML: 'IV'
+    }
+  ]
+  const [tonic, setTonic] = useState('A');
   const [favCount, setFavCount] = useState(0);
   console.log('app rerender');
 
@@ -40,12 +52,14 @@ export default function App() {
   }
   return (
     <div className='app-main-container'>
+      <MidiPlayer chords={chords}/>
       <div className='app-main-container-flex-item-1'>
         <CircleOfFifths
           chords={chords}
           addChord={addChord}
           chordSuggestions={chordSuggestions}
           tonic={tonic}
+          setTonic={setTonic}
         />
         {/* <ChordQuality /> */}
         <Progression

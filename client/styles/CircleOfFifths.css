@@ -1,43 +1,95 @@
 .main-container {
-    /* height: 1000px; */
-    width: 1000px;
     padding: 20px;
     background-color: rgb(42, 42, 42);
     display: flex;
     align-items: center;
     justify-content: center;
+    position: relative;
 }
 
 .main-circle {
     border-radius: 50%;
     background-color: grey;
+    border: 1px solid black;
     position: relative;
     display: flex;
     align-items: center;
     justify-content: center;
+    animation: 3s fadeIn ease-in-out;
+    /* z-index: 2; */
+}
+
+.main-circle-border {
+    border-radius: 50%;
+    border: 1px solid black;
+    position: absolute;
+    /* z-index: -1; */
+    background-color: lightblue;
 }
 
 .current-key {
-    background-color: white;
+    background-color: rgb(42, 42, 42);
+    color: white;
     border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
+    border: 2px solid white!important;
+    font-size: 50px;
+    box-shadow: 0px 0px 5px #999,
+    0px 0px 15px #666,
+    0px 0px 25px #333;
+}
+
+@keyframes fadeIn {
+    0% {opacity: 0;}
+    100% {opacity:1}
+}
+
+@keyframes positiveRotation {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(90deg);
+    }
+}
+
+@keyframes negativeRotation {
+    0% {
+        transform: rotate(90deg);
+    }
+    100% {
+        transform: rotate(0deg);
+    }
 }
 
 .key {
     position: absolute;
+    animation: 2s fadeIn;
     border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
+    border: 1px solid black;
+    box-shadow: 0px 0px 5px #999,
+    0px 0px 15px #666,
+    0px 0px 25px #333;
+}
+
+.key:hover {
+    /* opacity: .7; */
+    filter: saturate(150%) brightness(120%);
+    transition: .3s;
 }
 
 .major {
     background-color: lightblue;
+    font-size: 30px;
 }
 
 .minor {
     background-color: rgb(237, 165, 20);
+    font-size: 20px;
     color: white;
 }
