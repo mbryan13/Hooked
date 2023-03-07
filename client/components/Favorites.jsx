@@ -29,7 +29,7 @@ export default function Favorites(props) {
 
     useEffect(() => {
         fetchFavorites();
-        console.log('fav count increased', favCount);
+        // console.log('fav count increased', favCount);
     }, [favCount])
     return (
         <div className='favorites-container'>

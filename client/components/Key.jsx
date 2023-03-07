@@ -13,9 +13,9 @@ export default function Key(props) {
         return probableChords[0] ? `5px solid rgba(0, 155, 0, ${(probableChords[0].normalizedProbability).toFixed(3)})` : null;
     }
     return (
-        <div 
-            onClick={() => addChord({ name, scaleDegree })} 
-            style={{ transform: `${positionKey(degrees)}`, height: `${size}px`, width: `${size}px`, border: getProbability() }} 
+        <div
+            onClick={() => addChord({ name, scaleDegree, quality })}
+            style={{ transform: `${positionKey(degrees)}`, height: `${size}px`, width: `${size}px`, border: getProbability() }}
             className={`${quality} key`}>
             {name} ({scaleDegree})
         </div>

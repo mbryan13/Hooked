@@ -8,21 +8,20 @@ import MidiPlayer from './MidiPlayer.jsx';
 
 export default function App() {
   const [chords, setChords] = useState([]);
-  console.log(chords);
-7  // const [chordSuggestions, setChordSuggestions] = useState([]);
+  // console.log(chords);
+  // const [chordSuggestions, setChordSuggestions] = useState([]);
   const chordSuggestions = [
     {
-      probability: .182, 
+      probability: .182,
       chord_HTML: 'I'
-    }, 
+    },
     {
-      probability: .102, 
+      probability: .102,
       chord_HTML: 'IV'
     }
   ]
   const [tonic, setTonic] = useState('A');
   const [favCount, setFavCount] = useState(0);
-  console.log('app rerender');
 
   const incrementFavCount = () => setFavCount(favCount + 1);
 
@@ -52,7 +51,6 @@ export default function App() {
   }
   return (
     <div className='app-main-container'>
-      <MidiPlayer chords={chords}/>
       <div className='app-main-container-flex-item-1'>
         <CircleOfFifths
           chords={chords}
@@ -68,6 +66,7 @@ export default function App() {
           tonic={tonic}
           incrementFavCount={incrementFavCount}
         />
+        <MidiPlayer chords={chords} />
       </div>
       <div className="app-main-container-flex-item-2">
         <Favorites
