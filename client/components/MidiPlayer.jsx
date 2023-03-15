@@ -111,7 +111,7 @@ export default function MidiPlayer({ chords }) {
     major7: [0, 4, 7, 11],
     minor7: [0, 3, 7, 10],
     minor7: [0, 3, 6, 10],
-    dim: [0, 3, 6, 9],
+    diminished: [0, 3, 6, 9],
     dom7: [0, 4, 7, 10],
     major9: [0, 4, 7, 11, 14],
     minor9: [0, 3, 7, 10, 14]

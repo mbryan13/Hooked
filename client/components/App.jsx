@@ -19,10 +19,31 @@ export default function App() {
   //     chord_HTML: 'IV'
   //   }
   // ]
-  const [tonic, setTonic] = useState('D');
+  const notes = ['C', 'Db', 'D', 'Eb', 'E', 'F', 'Gb', 'G', 'Ab', 'A', 'Bb', 'B'];
+  const [tonic, setTonic] = useState({
+    note: 'C',
+    index: 0
+  });
   const [favCount, setFavCount] = useState(0);
 
   const incrementFavCount = () => setFavCount(favCount + 1);
+
+  const handleTonicChange = delta => {
+    const newTonic = {};
+    if (tonic.index === notes.length - 1 && delta === 1) {
+      newTonic.index = 0;
+      newTonic.note = notes[0];
+    }
+    else if (tonic.index === 0 && delta === -1) {
+      newTonic.index = notes.length - 1;
+      newTonic.note = notes[notes.length - 1];
+    }
+    else {
+      newTonic.index = tonic.index + delta;
+      newTonic.note = notes[newTonic.index];
+    }
+    setTonic(newTonic);
+  };
 
   const addChord = chord => {
     const newChords = [...chords];
@@ -55,14 +76,14 @@ export default function App() {
           chords={chords}
           addChord={addChord}
           chordSuggestions={chordSuggestions}
-          tonic={tonic}
-          setTonic={setTonic}
+          tonic={tonic.note}
+          handleTonicChange={handleTonicChange}
         />
         {/* <ChordQuality /> */}
         <Progression
           chords={chords}
           deleteChord={deleteChord}
-          tonic={tonic}
+          tonic={tonic.note}
           incrementFavCount={incrementFavCount}
         />
         <MidiPlayer chords={chords} />

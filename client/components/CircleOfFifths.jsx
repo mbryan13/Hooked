@@ -3,14 +3,15 @@ import '../styles/CircleOfFifths.css';
 import Key from './Key.jsx';
 
 export default function CircleOfFifths(props) {
-    const { addChord, chordSuggestions, tonic, setTonic } = props;
+    const { addChord, chordSuggestions, tonic, handleTonicChange } = props;
     const majorKeys = ['C', 'G', 'D', 'A', 'E', 'B', 'Gb', 'Db', 'Ab', 'Eb', 'Bb', 'F'];
     const minorKeys = ['A', 'E', 'B', 'Gb', 'Db', 'Ab', 'Eb', 'Bb', 'F', 'C', 'G', 'D'];
-    const CIRCLESIZE = 800;
+    const diminishedKeys = ['B', 'Gb', 'Db', 'Ab', 'Eb', 'Bb', 'F', 'C', 'G', 'D', 'A', 'E'];
+    const CIRCLESIZE = 1100;
 
     const calcProbability = key => {
-        const match = scaleDegrees[tonic][key];
-        let regex;
+        let regex, match;
+        if (scaleDegrees[tonic][key]) match = scaleDegrees[tonic][key].degree;
         const noMatches = {
             'i': 'v',
             'ii': 'i',
@@ -40,6 +41,9 @@ export default function CircleOfFifths(props) {
         else return [];
     }
 
+    const getScaleDegree = (key, quality) => (scaleDegrees[tonic][key] && scaleDegrees[tonic][key].quality === quality) ? romanToNumber[scaleDegrees[tonic][key].degree] : null;
+
+
     return (
         <div style={{ width: `${CIRCLESIZE + 25}px`, height: `${CIRCLESIZE + 25}px` }} className='main-container' >
             <div style={{ width: `${CIRCLESIZE + 25}px`, height: `${CIRCLESIZE + 25}px` }} className="main-circle-border"></div>
@@ -49,11 +53,11 @@ export default function CircleOfFifths(props) {
                         name={key}
                         degrees={30 * index}
                         radius={CIRCLESIZE / 2}
-                        size={CIRCLESIZE / 6}
+                        size={CIRCLESIZE / 7}
                         quality='major'
                         probableChords={calcProbability(key)}
                         addChord={addChord}
-                        scaleDegree={romanToNumber[scaleDegrees[tonic][key]]}
+                        scaleDegree={getScaleDegree(key, 'major')}
                     />
                 })}
                 {minorKeys.map((key, index) => {
@@ -61,17 +65,30 @@ export default function CircleOfFifths(props) {
                         name={`${key}`}
                         degrees={30 * index}
                         radius={CIRCLESIZE / 2}
-                        size={CIRCLESIZE / 9.5}
+                        size={CIRCLESIZE / 10}
                         quality='minor'
                         probableChords={calcProbability(key)}
                         addChord={addChord}
+                        scaleDegree={getScaleDegree(key, 'minor')}
+                    />
+                })}
+                {diminishedKeys.map((key, index) => {
+                    return <Key
+                        name={`${key}`}
+                        degrees={30 * index}
+                        radius={CIRCLESIZE / 2}
+                        size={CIRCLESIZE / 15}
+                        quality='diminished'
+                        probableChords={calcProbability(key)}
+                        addChord={addChord}
+                        scaleDegree={getScaleDegree(key, 'diminished')}
                     />
                 })}
                 <div style={{ height: CIRCLESIZE / 5, width: CIRCLESIZE / 5 }} className="key current-key">
                     {tonic}
                     <div className="tonic-buttons">
-                        <div className='arrow arrow-up'></div>
-                        <div className='arrow arrow-down'></div>
+                        <div onClick={() => handleTonicChange(1)} className='arrow arrow-up'></div>
+                        <div onClick={() => handleTonicChange(-1)} className='arrow arrow-down'></div>
                     </div>
                 </div>
             </div>
@@ -90,111 +107,365 @@ const romanToNumber = {
 
 const scaleDegrees = {
     'C': {
-        'C': 'I',
-        'D': 'ii',
-        'E': 'iii',
-        'F': 'IV',
-        'G': 'V',
-        'A': 'vi',
-        'B': 'vii'
+        'C': {
+            degree: 'I',
+            quality: 'major'
+        },
+        'D': {
+            degree: 'ii',
+            quality: 'minor'
+        },
+        'E': {
+            degree: 'iii',
+            quality: 'minor'
+        },
+        'F': {
+            degree: 'IV',
+            quality: 'major'
+        },
+        'G': {
+            degree: 'V',
+            quality: 'major'
+        },
+        'A': {
+            degree: 'vi',
+            quality: 'minor'
+        },
+        'B': {
+            degree: 'vii',
+            quality: 'diminished'
+        }
     },
     'Db': {
-        'Db': 'I',
-        'Eb': 'ii',
-        'F': 'iii',
-        'Gb': 'IV',
-        'Ab': 'V',
-        'Bb': 'vi',
-        'C': 'vii'
+        'Db': {
+            degree: 'I',
+            quality: 'major'
+        },
+        'Eb': {
+            degree: 'ii',
+            quality: 'minor'
+        },
+        'F': {
+            degree: 'iii',
+            quality: 'minor'
+        },
+        'Gb': {
+            degree: 'IV',
+            quality: 'major'
+        },
+        'Ab': {
+            degree: 'V',
+            quality: 'major'
+        },
+        'Bb': {
+            degree: 'vi',
+            quality: 'minor'
+        },
+        'C': {
+            degree: 'vii',
+            quality: 'diminished'
+        }
     },
     'D': {
-        'D': 'I',
-        'E': 'ii',
-        'Gb': 'iii',
-        'G': 'IV',
-        'A': 'V',
-        'B': 'vi',
-        'Db': 'vii'
+        'D': {
+            degree: 'I',
+            quality: 'major'
+        },
+        'E': {
+            degree: 'ii',
+            quality: 'minor'
+        },
+        'Gb': {
+            degree: 'iii',
+            quality: 'minor'
+        },
+        'G': {
+            degree: 'IV',
+            quality: 'major'
+        },
+        'A': {
+            degree: 'V',
+            quality: 'major'
+        },
+        'B': {
+            degree: 'vi',
+            quality: 'minor'
+        },
+        'Db': {
+            degree: 'vii',
+            quality: 'diminished'
+        }
     },
     'Eb': {
-        'Eb': 'I',
-        'F': 'ii',
-        'G': 'iii',
-        'Ab': 'IV',
-        'Bb': 'V',
-        'C': 'vi',
-        'D': 'vii'
+        'Eb': {
+            degree: 'I',
+            quality: 'major'
+        },
+        'F': {
+            degree: 'ii',
+            quality: 'minor'
+        },
+        'G': {
+            degree: 'iii',
+            quality: 'minor'
+        },
+        'Ab': {
+            degree: 'IV',
+            quality: 'major'
+        },
+        'Bb': {
+            degree: 'V',
+            quality: 'major'
+        },
+        'C': {
+            degree: 'vi',
+            quality: 'minor'
+        },
+        'D': {
+            degree: 'vii',
+            quality: 'diminished'
+        }
     },
     'E': {
-        'E': 'I',
-        'Gb': 'ii',
-        'Ab': 'iii',
-        'A': 'IV',
-        'B': 'V',
-        'Db': 'vi',
-        'Eb': 'vii'
+        'E': {
+            degree: 'I',
+            quality: 'major'
+        },
+        'Gb': {
+            degree: 'ii',
+            quality: 'minor'
+        },
+        'Ab': {
+            degree: 'iii',
+            quality: 'minor'
+        },
+        'A': {
+            degree: 'IV',
+            quality: 'major'
+        },
+        'B': {
+            degree: 'V',
+            quality: 'major'
+        },
+        'Db': {
+            degree: 'vi',
+            quality: 'minor'
+        },
+        'Eb': {
+            degree: 'vii',
+            quality: 'diminished'
+        }
     },
     'F': {
-        'F': 'I',
-        'G': 'ii',
-        'A': 'iii',
-        'Bb': 'IV',
-        'C': 'V',
-        'D': 'vi',
-        'E': 'vii'
+        'F': {
+            degree: 'I',
+            quality: 'major'
+        },
+        'G': {
+            degree: 'ii',
+            quality: 'minor'
+        },
+        'A': {
+            degree: 'iii',
+            quality: 'minor'
+        },
+        'Bb': {
+            degree: 'IV',
+            quality: 'major'
+        },
+        'C': {
+            degree: 'V',
+            quality: 'major'
+        },
+        'D': {
+            degree: 'vi',
+            quality: 'minor'
+        },
+        'E': {
+            degree: 'vii',
+            quality: 'diminished'
+        }
     },
     'Gb': {
-        'Gb': 'I',
-        'Ab': 'ii',
-        'Bb': 'iii',
-        'B': 'IV',
-        'Db': 'V',
-        'Eb': 'vi',
-        'F': 'vii'
+        'Gb': {
+            degree: 'I',
+            quality: 'major'
+        },
+        'Ab': {
+            degree: 'ii',
+            quality: 'minor'
+        },
+        'Bb': {
+            degree: 'iii',
+            quality: 'minor'
+        },
+        'B': {
+            degree: 'IV',
+            quality: 'major'
+        },
+        'Db': {
+            degree: 'V',
+            quality: 'major'
+        },
+        'Eb': {
+            degree: 'vi',
+            quality: 'minor'
+        },
+        'F': {
+            degree: 'vii',
+            quality: 'diminished'
+        }
     },
     'G': {
-        'G': 'I',
-        'A': 'ii',
-        'B': 'iii',
-        'C': 'IV',
-        'D': 'V',
-        'E': 'vi',
-        'Gb': 'vii'
+        'G': {
+            degree: 'I',
+            quality: 'major'
+        },
+        'A': {
+            degree: 'ii',
+            quality: 'minor'
+        },
+        'B': {
+            degree: 'iii',
+            quality: 'minor'
+        },
+        'C': {
+            degree: 'IV',
+            quality: 'major'
+        },
+        'D': {
+            degree: 'V',
+            quality: 'major'
+        },
+        'E': {
+            degree: 'vi',
+            quality: 'minor'
+        },
+        'Gb': {
+            degree: 'vii',
+            quality: 'diminished'
+        }
     },
     'Ab': {
-        'Ab': 'I',
-        'Bb': 'ii',
-        'C': 'iii',
-        'Db': 'IV',
-        'Eb': 'V',
-        'F': 'vi',
-        'G': 'vii'
+        'Ab': {
+            degree: 'I',
+            quality: 'major'
+        },
+        'Bb': {
+            degree: 'ii',
+            quality: 'minor'
+        },
+        'C': {
+            degree: 'iii',
+            quality: 'minor'
+        },
+        'Db': {
+            degree: 'IV',
+            quality: 'major'
+        },
+        'Eb': {
+            degree: 'V',
+            quality: 'major'
+        },
+        'F': {
+            degree: 'vi',
+            quality: 'minor'
+        },
+        'G': {
+            degree: 'vii',
+            quality: 'diminished'
+        }
     },
     'A': {
-        'A': 'I',
-        'B': 'ii',
-        'Db': 'iii',
-        'D': 'IV',
-        'E': 'V',
-        'Gb': 'vi',
-        'Ab': 'vii'
+        'A': {
+            degree: 'I',
+            quality: 'major'
+        },
+        'B': {
+            degree: 'ii',
+            quality: 'minor'
+        },
+        'Db': {
+            degree: 'iii',
+            quality: 'minor'
+        },
+        'D': {
+            degree: 'IV',
+            quality: 'major'
+        },
+        'E': {
+            degree: 'V',
+            quality: 'major'
+        },
+        'Gb': {
+            degree: 'vi',
+            quality: 'minor'
+        },
+        'Ab': {
+            degree: 'vii',
+            quality: 'diminished'
+        }
     },
     'Bb': {
-        'Bb': 'I',
-        'C': 'ii',
-        'D': 'iii',
-        'Eb': 'IV',
-        'F': 'V',
-        'G': 'vi',
-        'A': 'vii',
+        'Bb': {
+            degree: 'I',
+            quality: 'major'
+        },
+        'C': {
+            degree: 'ii',
+            quality: 'minor'
+        },
+        'D': {
+            degree: 'iii',
+            quality: 'minor'
+        },
+        'Eb': {
+            degree: 'IV',
+            quality: 'major'
+        },
+        'F': {
+            degree: 'V',
+            quality: 'major'
+        },
+        'G': {
+            degree: 'vi',
+            quality: 'minor'
+        },
+        'A': {
+            degree: 'vii',
+            quality: 'diminished'
+        },
+    },
+    'B': {
         'B': {
-            'B': 'I',
-            'Db': 'ii',
-            'Eb': 'iii',
-            'E': 'IV',
-            'Gb': 'V',
-            'Ab': 'vi',
-            'Bb': 'vii'
+            degree: 'I',
+            quality: 'major'
+        },
+        'Db': {
+            degree: 'ii',
+            quality: 'minor'
+        },
+        'Eb': {
+            degree: 'iii',
+            quality: 'minor'
+        },
+        'E': {
+            degree: 'IV',
+            quality: 'major'
+        },
+        'Gb': {
+            degree: 'V',
+            quality: 'major'
+        },
+        'Ab': {
+            degree: 'vi',
+            quality: 'minor'
+        },
+        'Bb': {
+            degree: 'vii',
+            quality: 'diminished'
         }
     }
 }
+
+

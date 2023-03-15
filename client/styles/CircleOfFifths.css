@@ -101,11 +101,17 @@
 
 .major {
     background-color: lightblue;
-    font-size: 30px;
+    font-size: 40px;
 }
 
 .minor {
     background-color: rgb(237, 165, 20);
-    font-size: 20px;
+    font-size: 30px;
     color: white;
+}
+
+.diminished {
+    background-color: saddlebrown;
+    color: white;
+    font-size: 20px;
 }
