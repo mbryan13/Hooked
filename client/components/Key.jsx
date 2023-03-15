@@ -17,7 +17,7 @@ export default function Key(props) {
             onClick={() => addChord({ name, scaleDegree, quality })}
             style={{ transform: `${positionKey(degrees)}`, height: `${size}px`, width: `${size}px`, border: getProbability() }}
             className={`${quality} key`}>
-            {name} ({scaleDegree})
+            {name} {scaleDegree ? `(${scaleDegree})` : null}
         </div>
     )
 }

@@ -9,7 +9,6 @@ export default function CircleOfFifths(props) {
     const CIRCLESIZE = 800;
 
     const calcProbability = key => {
-        // console.log(key);
         const match = scaleDegrees[tonic][key];
         let regex;
         const noMatches = {
@@ -42,8 +41,8 @@ export default function CircleOfFifths(props) {
     }
 
     return (
-        <div style={{ width: `${CIRCLESIZE + 25 }px`, height: `${CIRCLESIZE + 25 }px` }} className='main-container' >
-            <div style={{ width: `${CIRCLESIZE + 25 }px`, height: `${CIRCLESIZE + 25 }px` }} className="main-circle-border"></div>
+        <div style={{ width: `${CIRCLESIZE + 25}px`, height: `${CIRCLESIZE + 25}px` }} className='main-container' >
+            <div style={{ width: `${CIRCLESIZE + 25}px`, height: `${CIRCLESIZE + 25}px` }} className="main-circle-border"></div>
             <div style={{ width: `${CIRCLESIZE}px`, height: `${CIRCLESIZE}px` }} className="main-circle">
                 {majorKeys.map((key, index) => {
                     return <Key
@@ -68,7 +67,13 @@ export default function CircleOfFifths(props) {
                         addChord={addChord}
                     />
                 })}
-                <div style={{ height: CIRCLESIZE / 5, width: CIRCLESIZE / 5 }} className="key current-key">{tonic} <button>Up</button><button>Down</button></div>
+                <div style={{ height: CIRCLESIZE / 5, width: CIRCLESIZE / 5 }} className="key current-key">
+                    {tonic}
+                    <div className="tonic-buttons">
+                        <div className='arrow arrow-up'></div>
+                        <div className='arrow arrow-down'></div>
+                    </div>
+                </div>
             </div>
         </div >
     )

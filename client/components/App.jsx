@@ -8,19 +8,18 @@ import MidiPlayer from './MidiPlayer.jsx';
 
 export default function App() {
   const [chords, setChords] = useState([]);
-  // console.log(chords);
-  // const [chordSuggestions, setChordSuggestions] = useState([]);
-  const chordSuggestions = [
-    {
-      probability: .182,
-      chord_HTML: 'I'
-    },
-    {
-      probability: .102,
-      chord_HTML: 'IV'
-    }
-  ]
-  const [tonic, setTonic] = useState('A');
+  const [chordSuggestions, setChordSuggestions] = useState([]);
+  // const chordSuggestions = [
+  //   {
+  //     probability: .182,
+  //     chord_HTML: 'I'
+  //   },
+  //   {
+  //     probability: .102,
+  //     chord_HTML: 'IV'
+  //   }
+  // ]
+  const [tonic, setTonic] = useState('D');
   const [favCount, setFavCount] = useState(0);
 
   const incrementFavCount = () => setFavCount(favCount + 1);

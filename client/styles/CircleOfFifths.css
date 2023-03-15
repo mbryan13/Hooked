@@ -41,6 +41,14 @@
         0px 0px 25px #333;
 }
 
+.tonic-buttons {
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    left: 65%;
+    gap: 5px;
+}
+
 @keyframes fadeIn {
     0% {
         opacity: 0;

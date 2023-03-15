@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 
 export default function MidiPlayer({ chords }) {
+  const [bpm, setBPM] = useState(100);
   console.log(chords);
   // const chords = [
   //   {
@@ -54,11 +55,19 @@ export default function MidiPlayer({ chords }) {
     }
     setMidiControl(midiAccess);
   }
+
+  function calculateMeasureLength(bpm) {
+    const quarterNoteDuration = 60000 / bpm;
+    const measureDuration = quarterNoteDuration * 4;
+    return measureDuration;
+  }
+
   function playSequence() {
     let output = midiControl.outputs.get(portID);
     output.open();
 
-    const measureLength = 2000;
+    const measureLength = calculateMeasureLength(bpm);
+    console.log(measureLength);
     let currentMeasure = 0;
     const noteOn = (note, velocity, channel) => {
       output.send([channel, note, `0x${velocity.toString(16)}`]);
